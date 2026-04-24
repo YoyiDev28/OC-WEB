@@ -70,20 +70,38 @@ form.addEventListener("submit", (e) => {
 //SEARCH
 const search = document.getElementById('search');
 const searchBar = document.getElementById('searchBar');
-//click on the Magnifier icon to toggle the search bar
-search.addEventListener('click', function (){
-    searchBar.classList.toggle('show')
-    searchBar.classList.toggle('hide')
-})
+if (search && searchBar) {
+    search.addEventListener('click', function (){
+        searchBar.classList.toggle('show')
+        searchBar.classList.toggle('hide')
+    })
+}
 //press escape to close the search bar
  document.addEventListener('keydown', (event) => {
      var keyName = event.key;
      console.log("keyName");
-     if ((keyName == 'Escape' && searchBar.classList.contains('show') == true)) {
+     if (searchBar && keyName === 'Escape' && searchBar.classList.contains('show')) {
             searchBar.classList.toggle('show')
             searchBar.classList.toggle('hide')    
          }
  } )
+
+// Carousel controls for sec-4
+const carouselTrackContainer = document.querySelector('.carousel-track-container');
+const prevButton = document.querySelector('.carousel-control.prev');
+const nextButton = document.querySelector('.carousel-control.next');
+
+if (carouselTrackContainer && prevButton && nextButton) {
+    const scrollAmount = carouselTrackContainer.offsetWidth * 0.8;
+
+    prevButton.addEventListener('click', () => {
+        carouselTrackContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    nextButton.addEventListener('click', () => {
+        carouselTrackContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+}
 
 // Sticky header
 const headerTop = document.querySelector('#sec-0 header.top');

@@ -31,9 +31,55 @@ html {
 }
 
 /* SECTION ZERO = LANDING VIEW */
-#sec-0{
-    background: linear-gradient(rgb(255, 255, 255),rgba(0,0,0,0.8)), url(../Images/banner.jpg) no-repeat top center/cover;
+sec-0 {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
+/* 1. Posicionamos el video detrás de todo */
+.back-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; /* Lo envía al fondo */
+}
+
+/* 2. Filtro oscuro sobre el video */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradiente negro para resaltar logo y letras */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    z-index: -1; /* Encima del video, debajo del contenido */
+}
+
+/* 3. Aseguramos que el contenido esté al frente */
+#sec-0 header, 
+#sec-0 article {
+    position: relative;
+    z-index: 10; /* Los trae al frente */
+}
+
+/* 4. Estilo para que el texto resalte aún más */
+#sec-0 article h2 {
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Sombra para legibilidad */
+}
+
+#sec-0 article p {
+    color: #fff;
+    font-weight: 500;
+}
+
 #sec-0 header.top {
     background-color: var(--bgaccent_withOpacity);
     font-size: 0.85rem;
@@ -46,6 +92,7 @@ html {
     position: sticky;
     flex-wrap: wrap;
     justify-content: space-between;
+    z-index: 3;
 }
 
 #sec-0 header.top p {
@@ -423,18 +470,43 @@ text-shadow:1px 1px #73757E;
 
 
 .sec-emp {
-    background-color: #4a4a4a; /* Gris oscuro de la imagen */
-    padding: 6rem 0;
+    background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 50%, #2c2c2c 100%);
+    padding: 2rem 1rem; 
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.sec-emp::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 203, 15, 0.05) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .sec-emp h1 {
     color: var(--txtaccent);
     text-transform: uppercase;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
-    margin-bottom: 4rem;
-    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.sec-emp h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--haccent), transparent);
+    margin: 15px auto 0;
 }
 
 .sec-emp .logos-grid {
@@ -442,99 +514,180 @@ text-shadow:1px 1px #73757E;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 40px; /* Espacio entre logos */
-    max-width: 1000px;
+    gap: 2.5rem; 
+    max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .sec-emp .logo-item {
-    width: 150px; /* Tamaño del contenedor de cada logo */
-    height: 80px;
+    flex: 0 1 220px;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 203, 15, 0.1);
+}
+
+.sec-emp .logo-item:hover {
+    background: rgba(255, 203, 15, 0.08);
+    border-color: rgba(255, 203, 15, 0.3);
+    transform: translateY(-5px);
 }
 
 .sec-emp .logo-item img {
-    max-width: 100%;
-    max-height: 100%;
-    filter: grayscale(1) brightness(2); /* Los hace blancos/grises para que combinen */
-    opacity: 0.7;
-    transition: all 0.3s ease;
+    width: auto;
+    max-width: 100%; 
+    height: auto;
+    max-height: 100px;
+    filter: grayscale(0.2) opacity(0.8);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Efecto al pasar el mouse */
-.sec-emp .logo-item img:hover {
-    filter: grayscale(0) brightness(1); /* Vuelven a su color original */
-    opacity: 1;
-    transform: scale(1.1);
+/* Al pasar el mouse, recuperan brillo total y color */
+.sec-emp .logo-item:hover img {
+    filter: grayscale(0) opacity(1);
+    transform: scale(1.15);
+    box-shadow: 0 8px 16px rgba(255, 203, 15, 0.15);
 }
 
-/* Ajuste para celulares */
+/* Ajuste para móviles y tablets */
 @media (max-width: 768px) {
+    .sec-emp {
+        padding: 1.5rem 1rem;
+    }
     .sec-emp .logos-grid {
-        gap: 20px;
+        gap: 1.2rem;
     }
     .sec-emp .logo-item {
-        width: 120px;
+        flex: 0 1 140px;
+    }
+    .sec-emp .logo-item img {
+        max-height: 75px;
     }
 }
 
 
 /* SECTION 4 */
 #sec-4{
-    background: linear-gradient(rgba(78, 76, 70, 0.8),rgba(78, 76, 70, 0.8)), url(../Images/bg2.jpg) no-repeat center center/cover;
+    background: linear-gradient(rgba(78, 76, 70, 0.9),rgba(78, 76, 70, 0.9)), url(../Images/bg2.jpg) no-repeat center center/cover;
     text-align: center;
     padding-top: 2rem;
     padding-bottom: 4rem;
+    position: relative;
 }
 #sec-4 h1{
     text-transform: uppercase;
-    font-size: 1.7rem;
-    margin-bottom: 1.6rem;
+    font-size: 1.9rem;
+    margin-bottom: 1.2rem;
     color: var(--txtaccent);
     font-weight: 800;
 }
 #sec-4 p{
-    color: var(--txtaccent);
-    font-size: 0.9rem;
-    padding: 0px 6rem;
-    margin-bottom: 2rem;
+    display: none;
 }
-#sec-4 .filter{
-    margin-bottom: 2rem;
-    padding: 0px 6rem;
+#sec-4 .carousel{
+    position: relative;
+    margin: 0 auto;
+    max-width: 1200px;
 }
-#sec-4 .filter a{
-    display: inline-block;
-    padding: 3px 20px 5px;
-    border-radius: 15px;
-    color: var(--txtaccent);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: background-color 0.65s ease;
-    font-size: 0.85rem;
+#sec-4 .carousel-track-container{
+    overflow: hidden;
+    border-radius: 25px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
 }
-#sec-4 .filter a:hover{
-    background-color: var(--bgaccent);
-}
-#sec-4 .cont{
-    width: 90%;
-    margin: 0px auto;
-}
-#sec-4 .cont>img{
-    width: 100%;
-    display: block;
-    margin: 0px auto 20px;
-}
-#sec-4 aside{
+#sec-4 .carousel-track{
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 1.25rem;
+    transition: transform 0.45s ease;
+    padding: 1rem;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
 }
-#sec-4 aside img{
-    margin-bottom: 10px;
-    width: 48%;
+#sec-4 .carousel-track::-webkit-scrollbar{
+    height: 10px;
+}
+#sec-4 .carousel-track::-webkit-scrollbar-thumb{
+    background: rgba(255,203,15,0.45);
+    border-radius: 999px;
+}
+#sec-4 .carousel-item{
+    flex: 0 0 auto;
+    width: clamp(240px, 35%, 400px);
+    scroll-snap-align: center;
+    min-height: 220px;
+}
+#sec-4 .carousel-item img{
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+#sec-4 .carousel-control{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(26, 28, 39, 0.85);
+    color: var(--txtaccent);
+    font-size: 1.8rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+#sec-4 .carousel-control:hover{
+    transform: translateY(-50%) scale(1.05);
+    background: rgba(255, 203, 15, 0.95);
+}
+#sec-4 .carousel-control.prev{
+    left: 1rem;
+}
+#sec-4 .carousel-control.next{
+    right: 1rem;
+}
+@media (max-width: 992px) {
+    #sec-4 .carousel-track {
+        padding: 0.75rem;
+    }
+    #sec-4 .carousel-item {
+        width: clamp(260px, 45%, 320px);
+    }
+    #sec-4 .carousel-control {
+        width: 42px;
+        height: 42px;
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 768px) {
+    #sec-4 .carousel-track {
+        gap: 0.9rem;
+    }
+    #sec-4 .carousel-item {
+        width: min(90vw, 320px);
+    }
+    #sec-4 .carousel-control.prev {
+        left: 0.5rem;
+    }
+    #sec-4 .carousel-control.next {
+        right: 0.5rem;
+    }
 }
 /* SECTION 5 */
 #sec-5{
@@ -597,6 +750,10 @@ text-shadow:1px 1px #73757E;
     display: block;
     margin: 0px auto;
     border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: center;
 }
 #sec-5 figcaption{
     text-transform: uppercase;
@@ -727,8 +884,6 @@ text-shadow:1px 1px #73757E;
     color: inherit;
     text-decoration: none;
     display: block;
-}
-#sec-6 .links a{
     position: relative;
     padding: 0.2em;
     padding-left: 25px;
@@ -807,6 +962,109 @@ text-shadow:1px 1px #73757E;
 }
 
 /*MEDIA QUERRIES*/
+/* Extra small devices (celulares, < 576px) */
+@media (max-width: 575px) {
+    html{
+        font-size: 11px;
+    }
+    .container {
+        width: 100%;
+        padding: 0 10px;
+    }
+    
+    /* SEC-0 */
+    #sec-0 article {
+        padding: 2rem 0px;
+        margin-top: 2rem;
+        flex-direction: column;
+    }
+    #sec-0 article img {
+        width: 200px;
+        margin-left: 0px;
+        margin-bottom: 1.5rem;
+    }
+    #sec-0 article h2 {
+        font-size: 1.5rem;
+    }
+    #sec-0 article p {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* SEC-1 */
+    #sec-1 article {
+        text-align: center;
+    }
+    #sec-1 aside {
+        text-align: center;
+    }
+    
+    /* SEC-4 */
+    #sec-4 p {
+        padding: 0px 1rem;
+    }
+    #sec-4 .filter {
+        padding: 0px 1rem;
+    }
+    
+    /* SEC-5 */
+    #sec-5 article {
+        width: 100%;
+    }
+    #sec-5 .quotetxt {
+        padding: 1.2em 1em 1.5em 0.8em;
+    }
+    #sec-5 .quotetxt p:first-child {
+        padding-right: 0.3em;
+    }
+    #sec-5 .quotetxt p:first-child img {
+        width: 30px;
+        height: 30px;
+    }
+    #sec-5 .customer {
+        width: 90px;
+        height: 90px;
+    }
+    #sec-5 h1+p {
+        padding: 0px 1rem;
+    }
+    
+    /* SEC-6 */
+    #sec-6 .container {
+        flex-direction: column;
+        row-gap: 1.5rem;
+    }
+    #sec-6 .about,
+    #sec-6 .links,
+    #sec-6 .posts,
+    #sec-6 .contact {
+        width: 100% !important;
+    }
+    #sec-6 h1 {
+        font-size: 1rem;
+    }
+    #sec-6 .about h2 {
+        font-size: 1.1rem;
+    }
+    
+    /* SEC-EMP */
+    .sec-emp h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .sec-emp .logos-grid {
+        gap: 1rem;
+    }
+    .sec-emp .logo-item {
+        flex: 0 1 100px;
+        padding: 8px;
+    }
+    .sec-emp .logo-item img {
+        max-height: 60px;
+    }
+}
+
 /*Smart phones */
 @media (min-width: 576px) {
     html{
@@ -828,6 +1086,26 @@ text-shadow:1px 1px #73757E;
     }
     #sec-0 #searchBox {
         transform: translateY(25px);
+    }
+    
+    /* SEC-5 */
+    #sec-5 article {
+        width: 100%;
+    }
+    #sec-5 .customer {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* SEC-6 */
+    #sec-6 .container {
+        flex-direction: column;
+    }
+    #sec-6 .about,
+    #sec-6 .links,
+    #sec-6 .posts,
+    #sec-6 .contact {
+        width: 100% !important;
     }
 }
 /* Medium devices (tablets, 768px and up) */
@@ -949,6 +1227,16 @@ text-shadow:1px 1px #73757E;
     #sec-5 article{
         width: 43%;
     }
+    #sec-5 .quotetxt {
+        padding: 1.5em 1.5em 1.8em 1em;
+    }
+    #sec-5 .customer {
+        width: 110px;
+        height: 110px;
+    }
+    #sec-5 figcaption {
+        font-size: 0.95rem;
+    }
     #sec-5 .contactUs form input+p{
         bottom: 4px;
     }
@@ -1048,6 +1336,16 @@ text-shadow:1px 1px #73757E;
     #sec-5 article{
         width: 30%;
     }
+    #sec-5 .quotetxt {
+        padding: 1.8em 1.7em 2em 1em;
+    }
+    #sec-5 .customer {
+        width: 120px;
+        height: 120px;
+    }
+    #sec-5 figcaption {
+        font-size: 1rem;
+    }
     #sec-5 .contactUs>.container {
         display: flex;
         justify-content: space-between;
@@ -1095,6 +1393,24 @@ text-shadow:1px 1px #73757E;
     }
     .container {
         width: 1340px;
+    }
+    
+    /* SEC-EMP */
+    .sec-emp {
+        padding: 2.5rem 1rem;
+    }
+    .sec-emp h1 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+    .sec-emp .logos-grid {
+        gap: 3rem;
+    }
+    .sec-emp .logo-item {
+        flex: 0 1 240px;
+    }
+    .sec-emp .logo-item img {
+        max-height: 110px;
     }
 }
 

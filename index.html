@@ -14,17 +14,12 @@
 
 <body>
     <section id="sec-0">
-        <header class="top">
-            <div class="container">
-                <p>+54 9 2645 42 0625</p>   
-                <p>gestion@ocserviciosindustriales.com</p>
-                <div class="social">
-                    <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </header>
+
+        <video autoplay muted loop playsinline class="back-video">
+        <source src="Images/banner.mp4" type="video/mp4">
+    </video>
+    
+    <div class="video-overlay"></div>
         <header>
             <div class="hide" id="searchBar">
                 <input type="search" name="searchBox" id="searchBox" placeholder="Type your search here..    Press [Esc] to exist">
@@ -39,9 +34,9 @@
                 <input type="checkbox" id="menu">
                 <nav>
                     <a href="#sec-0">Inicio</a>
-                    <a href="#sec-4">Proyectos</a>
-                    <a href="#sec-6">Empresas</a>
-                    <a href="#sec-5">Contacto</a>
+                    <a href="#sec-3">Proyectos</a>
+                    <a href="#sec-emp">Empresas</a>
+                    <a href="#sec-6">Contacto</a>
                 </nav>
             </div>
         </header>
@@ -52,6 +47,7 @@
             <span>Mantenimiento y seguridad.</span></h2>
             <p>Llevamos dos generaciones ejecutando los servicios esenciales de la
                 industria de cuyo y del país.</p>
+        </div>
         </article>
     </section>
     <section id="sec-1">
@@ -148,30 +144,39 @@
         </div>
     </section>
 
-            
-<section class="sec-emp">
-    <div class="container">
-        <h1>Confían en nosotros</h1>
-        <div class="logos-grid">
-            <div class="logo-item">
-                <img src="Images/logo1.png" alt="Cliente 1">
+
+    <section id="sec-emp" class="sec-emp">
+        <div class="container">
+            <h1>Confían en nosotros</h1>
+            <div class="logos-grid">
+                <div class="logo-item">
+                    <img src="Images/logoinalpa.png" alt="Cliente 1">
             </div>
             <div class="logo-item">
-                <img src="Images/logo2.png" alt="Cliente 2">
+                <img src="Images/logosherwin.png" alt="Cliente 2">
             </div>
             <div class="logo-item">
-                <img src="Images/logo3.png" alt="Cliente 3">
+                <img src="Images/logoadisol.png" alt="Cliente 3">
             </div>
             <div class="logo-item">
-                <img src="Images/logo4.png" alt="Cliente 4">
+                <img src="Images/logoregis.png" alt="Cliente 4">
             </div>
             <div class="logo-item">
-                <img src="Images/logo5.png" alt="Cliente 5">
+                <img src="Images/sinteplastlogo.png" alt="Cliente 5">
             </div>
             <div class="logo-item">
-                <img src="Images/logo6.png" alt="Cliente 6">
+                <img src="Images/logodulcor.png" alt="Cliente 6">
             </div>
+            <div class="logo-item">
+                <img src="Images/logotexxor.png" alt="Cliente 7">
             </div>
+            <div class="logo-item">
+                <img src="Images/logoenav.png" alt="Cliente 8">
+            </div>
+            <div class="logo-item">
+                <img src="Images/logonucete.png" alt="Cliente 9">
+            </div>
+        </div>
     </div>
 </section>
 
@@ -180,17 +185,33 @@
         <div class="container">
             <h1>Trabajos Realizados</h1>
             <p></p>
-                <div class="cont">
-                <img class="wow animated fadeIn slow" src="Images/gallery1.jpg" alt="pic">
-                <aside>
-                    <img src="Images/gallery3.jpg" alt="pic" class="wow animated flipInX delay-1s">
-                    <img src="Images/gallery2.jpg" alt="pic" class="wow animated flipInX delay-1s slower">
-                    <img src="Images/gallery4.jpg" alt="pic" class="wow animated flipInX delay-2s">
-                    <img src="Images/gallery5.jpg" alt="pic" class="wow animated flipInX delay-2s slower">
-                </aside>    
+            <div class="carousel">
+                <button class="carousel-control prev" aria-label="Anterior">‹</button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="carousel-item wow animated fadeIn slow">
+                            <img src="Images/gallery1.jpg" alt="Trabajo 1">
+                        </div>
+                        <div class="carousel-item wow animated flipInX delay-1s">
+                            <img src="Images/gallery3.jpg" alt="Trabajo 2">
+                        </div>
+                        <div class="carousel-item wow animated flipInX delay-1s slower">
+                            <img src="Images/gallery2.jpg" alt="Trabajo 3">
+                        </div>
+                        <div class="carousel-item wow animated flipInX delay-2s">
+                            <img src="Images/gallery4.jpg" alt="Trabajo 4">
+                        </div>
+                        <div class="carousel-item wow animated flipInX delay-2s slower">
+                            <img src="Images/gallery5.jpg" alt="Trabajo 5">
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control next" aria-label="Siguiente">›</button>
             </div>
         </div>
     </section>
+
+
     <section id="sec-5">
         <div class="container">
             <h1>Clientes Satisfechos</h1>
@@ -202,7 +223,7 @@
                         <p>Gracias a OC Pude construir mi casa a tiempo y con la calidad esperada, con los reportes que te brindan y el mayor de los respetos desde la perspectiva de un cliente satisfecho.</p>
                     </div>
                     <figure>
-                        <img class="customer" src="Images/cust1.png" alt="customer1">
+                        <img class="customer" src="Images/fotoclaudia.jpg" alt="customer1">
                         <figcaption>Claudia Lopez</figcaption>
                     </figure>
                 </article>
@@ -212,18 +233,18 @@
                         <p>Con OC puedo mantener un seguimiento constante de los avances del proyecto y sentirme seguro de la calidad del trabajo realizado. Nuestras bodegas se mantienen en perfectas condiciones gracias al trabajo realizado por OC.</p>
                     </div>
                     <figure>
-                        <img class="customer" src="Images/cust1.png" alt="customer1">
-                        <figcaption>Bodegas ENAP</figcaption>
+                        <img class="customer" src="Images/logoenav.png" alt="customer1">
+                        <figcaption>Bodegas ENAV</figcaption>
                     </figure>
                 </article>
                 <article class="quoteblock">
                     <div class="quotetxt arrow">
-                        <p><img src="Images/blockquote2.png" alt="quote mark"></p>
-                        <p></p> 
+                        <p><img src="Images/blockquote1.png" alt="quote mark"></p>
+                        <p>Gracias a OC nuestra industria se mantiene en las mejores condiciones, seguimos creciendo juntos con el mantenimiento adecuado que nos brindan.</p>
                     </div>
                     <figure>
-                        <img class="customer" src="Images/cust1.png" alt="customer1">
-                        <figcaption>Gabriela Rodriguez</figcaption>
+                        <img class="customer" src="Images/logodulcor.png" alt="customer1">
+                        <figcaption>Dulcor Alimentos</figcaption>
                     </figure>
                 </article>
             </div>
@@ -231,45 +252,41 @@
         <div class="contactUs">
             <div class="container">
                 <aside>
-                    <h1>do you have any questions?</h1>
-                    <h2>feel free to contact us!</h2>
+                    <h1>Tenes duda o alguna obra en mente?</h1>
+                    <h2>Escribinos!</h2>
                 </aside>
                 <form id="form" action="/" method="">
-                    <input type="text" name="name" id="" placeholder="Name" required>
+                    <input type="text" name="name" id="" placeholder="Nombre" required>
                     <input type="email" name="email" id="email" placeholder="Email" required>
-                    <input type="text" name="message" id="" placeholder="Message" required>
-                    <input type="submit" value="submit" id="submit">
+                    <input type="text" name="message" id="" placeholder="Mensaje" required>
+                    <input type="submit" value="Enviar" id="Enviar">
                     <p id="msg"></p>
-                </form>
+                </form> 
             </div>
         </div>
     </section>
     <section id="sec-6">
         <div class="container">
             <div class="about">
-                <h1>About Company</h1>
-                <h2>
-                    CONSTRUCTION 
-                    <p>Lorem ipsum dolor sit amit.</p>
-                </h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus eius nisi repudiandae ipsam pariatur, quos perspiciatis eaque officia rerum odio modi sed fugiat mollitia? Rerum, architecto obcaecati!</p>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>  
-                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <h2>OC Servicios <br>Industriales</h2>
+                <p>Nuestras Redes Sociales.</p>
+                <a href="https://www.facebook.com/profile.php?id=61584160016451"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/oc.serviciosok/"><i class="fab fa-instagram"></i></a>  
+                <a href="https://www.linkedin.com/in/gabriel-leal-602296400/"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             
             <div class="contact">
-                <h1>Contact us</h1>
-                <p>123 New Line, London UK</p>
-                <p>Hello@contact-us.com</p>
-                <p>+44 00 00 1234<br>+44 00 00 1234</p>
+                <h1>Contactos</h1>
+                <p>San Juan, Argentina</p>
+                <p>gestion@ocserviciosindustriales.com</p>
+                <p>+54 9 2645471775</p>
 
             </div>
         </div>
     </section>
     <section id="sec-7">
         <div class="container">
-            <p>Copyright @2022 | Designed by <span>YoyiDev28</span></p>
+            <p>Copyright @2022 | Designed by <a href="https://github.com/YoyiDev28">YoyiDev28</a></p>
         </div>
     </section>
 
