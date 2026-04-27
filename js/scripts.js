@@ -1,6 +1,6 @@
 //function to validate user email address
+const form = document.getElementById('form');
 function criteria() { 
-    const form = document.getElementById('form');
     const validChars = ['.', '@', '_','-'];
     let email = document.getElementById('email').value;    
     let msg = document.getElementById('msg');
@@ -62,10 +62,12 @@ function criteria() {
     }   
 }    
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    criteria();
-});
+if (form) {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        criteria();
+    });
+}
 
 //SEARCH
 const search = document.getElementById('search');
@@ -87,27 +89,17 @@ if (search && searchBar) {
  } )
 
 // Carousel controls for sec-4
-const carouselTrackContainer = document.querySelector('.carousel-track-container');
-const prevButton = document.querySelector('.carousel-control.prev');
-const nextButton = document.querySelector('.carousel-control.next');
-
-if (carouselTrackContainer && prevButton && nextButton) {
-    const scrollAmount = carouselTrackContainer.offsetWidth * 0.8;
-
-    prevButton.addEventListener('click', () => {
-        carouselTrackContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-
-    nextButton.addEventListener('click', () => {
-        carouselTrackContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
-}
+// Removed - carousel replaced with collage
 
 // Sticky header
-const headerTop = document.querySelector('#sec-0 header.top');
+const headerTop = document.querySelector('#sec-0 header.top, #sec-0 header:first-of-type');
 const headerMain = document.querySelector('#sec-0 header:last-of-type');
 
 window.addEventListener('scroll', () => {
+    if (!headerTop) {
+        return;
+    }
+
     const topHeight = headerTop.offsetHeight;
     if (window.scrollY > topHeight) {
         document.body.classList.add('header-fixed');
@@ -115,4 +107,92 @@ window.addEventListener('scroll', () => {
         document.body.classList.remove('header-fixed');
     }
 });
+
+// Smooth scroll for internal anchors
+const smoothAnchors = document.querySelectorAll('a[href^="#"]');
+smoothAnchors.forEach(link => {
+    link.addEventListener('click', (event) => {
+        const targetId = link.getAttribute('href').slice(1);
+        const targetElement = document.getElementById(targetId);
+        const menuCheckbox = document.getElementById('menu');
+
+        if (!targetElement) {
+            return;
+        }
+
+        event.preventDefault();
+        const headerHeight = headerMain ? headerMain.offsetHeight : 80;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+
+        if (menuCheckbox) {
+            menuCheckbox.checked = false;
+        }
+    });
+});
+
+// Scroll reveal animations
+const revealingSelectors = [
+    '#sec-0 article',
+    '#sec-1 article',
+    '#sec-1 aside',
+    '#sec-2 .container > h1',
+    '#sec-2 .container > p',
+    '#sec-2 article figure',
+    '#sec-3 .card',
+    '.sec-emp .logo-item',
+    '#sec-4 .collage img',
+    '#sec-5 .quoteblock',
+    '#sec-5 .contactUs',
+    '#sec-6 .about',
+    '#sec-6 .links',
+    '#sec-6 .contact'
+];
+
+const revealElements = revealingSelectors.reduce((list, selector) => {
+    return list.concat(Array.from(document.querySelectorAll(selector)));
+}, []);
+
+revealElements.forEach(el => {
+    el.classList.add('reveal');
+
+    if (el.matches('#sec-1 article, #sec-2 .container > h1, #sec-4 .collage img, #sec-5 .quoteblock')) {
+        el.classList.add('reveal-up');
+    } else if (el.matches('#sec-1 aside, #sec-6 .contact')) {
+        el.classList.add('reveal-right');
+    } else if (el.matches('#sec-2 article figure')) {
+        el.classList.add('reveal-left');
+    }
+});
+
+const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Parallax movement for hero image
+const parallaxElements = document.querySelectorAll('.parallax');
+const updateParallax = () => {
+    const scrollTop = window.pageYOffset;
+    parallaxElements.forEach(el => {
+        const speed = Number(el.dataset.parallaxSpeed || 0.16);
+        el.style.transform = `translateY(${scrollTop * speed}px)`;
+    });
+};
+
+window.addEventListener('scroll', updateParallax, { passive: true });
+updateParallax();
+
+const heroImage = document.querySelector('#sec-0 article img');
+if (heroImage) {
+    heroImage.classList.add('parallax');
+    heroImage.dataset.parallaxSpeed = '0.16';
+}
 

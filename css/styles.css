@@ -9,6 +9,7 @@ html {
     font-size: 12px;
     color: #000;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
 }
 
 :root{
@@ -590,103 +591,35 @@ text-shadow:1px 1px #73757E;
 #sec-4 p{
     display: none;
 }
-#sec-4 .carousel{
-    position: relative;
-    margin: 0 auto;
+#sec-4 .collage {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
     max-width: 1200px;
-}
-#sec-4 .carousel-track-container{
-    overflow: hidden;
-    border-radius: 25px;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
-}
-#sec-4 .carousel-track{
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 1.25rem;
-    transition: transform 0.45s ease;
+    margin: 0 auto;
     padding: 1rem;
-    scroll-behavior: smooth;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    width: 100%;
 }
-#sec-4 .carousel-track::-webkit-scrollbar{
-    height: 10px;
-}
-#sec-4 .carousel-track::-webkit-scrollbar-thumb{
-    background: rgba(255,203,15,0.45);
-    border-radius: 999px;
-}
-#sec-4 .carousel-item{
-    flex: 0 0 auto;
-    width: clamp(240px, 35%, 400px);
-    scroll-snap-align: center;
-    min-height: 220px;
-}
-#sec-4 .carousel-item img{
+
+#sec-4 .collage img {
     width: 100%;
     height: auto;
-    max-height: 420px;
+    max-height: 300px;
     object-fit: cover;
-    border-radius: 20px;
-    display: block;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-#sec-4 .carousel-control{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(26, 28, 39, 0.85);
-    color: var(--txtaccent);
-    font-size: 1.8rem;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 5;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+
+#sec-4 .collage img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
-#sec-4 .carousel-control:hover{
-    transform: translateY(-50%) scale(1.05);
-    background: rgba(255, 203, 15, 0.95);
-}
-#sec-4 .carousel-control.prev{
-    left: 1rem;
-}
-#sec-4 .carousel-control.next{
-    right: 1rem;
-}
-@media (max-width: 992px) {
-    #sec-4 .carousel-track {
-        padding: 0.75rem;
-    }
-    #sec-4 .carousel-item {
-        width: clamp(260px, 45%, 320px);
-    }
-    #sec-4 .carousel-control {
-        width: 42px;
-        height: 42px;
-        font-size: 1.5rem;
-    }
-}
+
 @media (max-width: 768px) {
-    #sec-4 .carousel-track {
-        gap: 0.9rem;
-    }
-    #sec-4 .carousel-item {
-        width: min(90vw, 320px);
-    }
-    #sec-4 .carousel-control.prev {
-        left: 0.5rem;
-    }
-    #sec-4 .carousel-control.next {
-        right: 0.5rem;
+    #sec-4 .collage {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.75rem;
+        padding: 0.75rem;
     }
 }
 /* SECTION 5 */
@@ -824,7 +757,7 @@ text-shadow:1px 1px #73757E;
 }
 /* SECTION SIX */
 #sec-6{
-    background: linear-gradient(rgba(0, 0, 0,0.9),rgba(0, 0, 0,0.9)), url(../Images/rascacielos-nueva-york.jpg) no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0,0.9),rgba(0, 0, 0,0.9)), url(../Images/sanjuan.jpeg) no-repeat center center/cover;
     padding-top: 2rem;
     padding-bottom: 4rem;
     font-size: 0.8rem;
@@ -959,6 +892,42 @@ text-shadow:1px 1px #73757E;
 }
 #sec-7 p span{
     color: var(--haccent);
+}
+
+/* Reveal and scroll animation helpers */
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    transform: translateX(-35px);
+}
+
+.reveal-right {
+    transform: translateX(35px);
+}
+
+.reveal-up {
+    transform: translateY(45px);
+}
+
+.reveal.active.reveal-left,
+.reveal.active.reveal-right,
+.reveal.active.reveal-up {
+    transform: translate(0, 0);
+}
+
+.parallax {
+    transition: transform 0.15s ease-out;
+    will-change: transform;
 }
 
 /*MEDIA QUERRIES*/
